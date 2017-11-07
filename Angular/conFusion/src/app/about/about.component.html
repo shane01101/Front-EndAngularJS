@@ -65,6 +65,9 @@ fxLayoutGap="10px">
 			<p md-line> {{leader.designation}} </p>
 			<p md-line> {{leader.description}} </p> 
 			</md-list-item>
-		</md-list>    
+        </md-list> 
+        <div [hidden]="leaders">
+            <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+        </div>   
 	</div>
 </div>
