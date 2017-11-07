@@ -24,16 +24,16 @@ fxLayoutGap="10px">
              </md-card-title>
            </md-card-header>
            <md-card-content>
-                   <dl>
-                       <dt>Started</dt>
-                       <dd>3 Feb. 2013</dd>
-                       <dt>Major Stake Holder</dt>
-                       <dd>HK Fine Foods Inc.</dd>
-                       <dt>Last Year's Turnover</dt>
-                       <dd>$1,250,375</dd>
-                       <dt>Employees</dt>
-                       <dd>40</dd>
-                  </dl>
+                <dl>
+                    <dt>Started</dt>
+                    <dd>3 Feb. 2013</dd>
+                    <dt>Major Stake Holder</dt>
+                    <dd>HK Fine Foods Inc.</dd>
+                    <dt>Last Year's Turnover</dt>
+                    <dd>$1,250,375</dd>
+                    <dt>Employees</dt>
+                    <dd>40</dd>
+                </dl>
            </md-card-content>
          </md-card>
      </div>
@@ -41,16 +41,16 @@ fxLayoutGap="10px">
  </div>
  
  <div fxFlex>
-           <md-card>
-               <blockquote>
-                   <h3>You better cut the pizza in four pieces because
-                       I'm not hungry enough to eat six.</h3>
-                   <footer>-- Yogi Berra,
-                     <cite>The Wit and Wisdom of Yogi Berra,
-                       P. Pepe, Diversion Books, 2014</cite>
-                   </footer>
-               </blockquote>
-           </md-card>
+    <md-card>
+        <blockquote>
+            <h3>You better cut the pizza in four pieces because
+                I'm not hungry enough to eat six.</h3>
+            <footer>-- Yogi Berra,
+                <cite>The Wit and Wisdom of Yogi Berra,
+                P. Pepe, Diversion Books, 2014</cite>
+            </footer>
+        </blockquote>
+    </md-card>
  </div>
 
 
@@ -59,11 +59,11 @@ fxLayoutGap="10px">
 			<h2>Corporate Leadership</h2>
 			<md-list-item *ngFor="let leader of leaders" class="md-3-line">
 			<img md-list-avatar src="{{leader.image}}" alt="{{leader.name}}">
-			<h3 md-line>
-				<span>{{leader.name}} {{leader.abbr}}</span>
-			</h3>
-			<p md-line> {{leader.designation}} </p>
-			<p md-line> {{leader.description}} </p> 
+                <h3 md-line>
+                    <span>{{leader.name}} {{leader.abbr}}</span>
+                </h3>
+                <p md-line> {{leader.designation}} </p>
+                <p md-line> {{leader.description}} </p> 
 			</md-list-item>
         </md-list> 
         <div [hidden]="leaders">
