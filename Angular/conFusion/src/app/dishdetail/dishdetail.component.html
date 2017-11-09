@@ -30,18 +30,50 @@
 	</div>
 
 	<div fxFlex="40" *ngIf="dish">
+	<md-list>
+		<h3>Comments</h3>
+		<md-list-item *ngFor="let comment of dish.comments">
+			<p md-line> {{comment.comment}} </p>
+			<p md-line> {{comment.rating}} Stars</p>
+			<p md-line>
+				<span> -- {{comment.author}} {{comment.date | date}} </span>
+			</p>
+		</md-list-item>
+	</md-list>
+
+	<div *ngIf="commentForm.valid">
 		<md-list>
-			<h3>Comments</h3>
-			<md-list-item *ngFor="let comment of dish.comments">
-				<p md-line> {{comment.comment}} </p>
-				<p md-line> {{comment.rating}} Stars</p>
-				<p md-line>
-					<span> -- {{comment.author}} {{comment.date | date}} </span>
+			<md-list-item>
+				<p mdLine> {{commentForm.value.comment}} </p>
+				<p mdLine> {{commentForm.value.rating}} Stars </p>
+				<p mdLine>
+					<span> -- {{commentForm.value.author}}</span>
 				</p>
 			</md-list-item>
 		</md-list>
 	</div>
-	<div [hidden]="dish">
-		<md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
-	</div>
+
+	<form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+		<md-input-container class="full-width"
+			dividerColor="{{(formErrors.author) ? 'warn' : 'primary'}}">
+			<input mdInput formControlName="author" placeholder="Name" type="text">
+			<md-hint>
+				<span [hidden]="!(formErrors.author)">
+					{{formErrors.author}}</span>
+			</md-hint>
+		</md-input-container>
+
+		<md-slider formControlName="rating" min="1" max="5" step="1" value="5" thumbLabel tickInterval="1"></md-slider>
+
+		<md-input-container class="full-width"
+			dividerColor="{{(formErrors.comment) ? 'warn' : 'primary'}}">
+			<textarea mdInput formControlName="comment" placeholder="Your Comment" rows=6></textarea>
+			<md-hint>
+				<span [hidden]="!(formErrors.comment)">
+					{{formErrors.comment}}</span>
+			</md-hint>
+		</md-input-container>
+
+		<button type="submit" md-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+	</form>
 </div>
