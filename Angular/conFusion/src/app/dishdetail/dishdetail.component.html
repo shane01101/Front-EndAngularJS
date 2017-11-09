@@ -13,7 +13,7 @@
 					<h3>{{dish.name | uppercase}}</h3>
 				</md-card-title>
 			</md-card-header>
-			<img md-card-image src={{dish.image}} alt={{dish.name}}>
+			<img md-card-image src="{{BaseURL + dish.image}}" alt={{dish.name}}>
 			<md-card-content>
 				<p>{{dish.description}}
 				</p>
@@ -76,4 +76,12 @@
 
 		<button type="submit" md-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
 	</form>
+
+	<div [hidden]="dishes || errMess">
+		<md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+	</div>
+	<div *ngIf="errMess">
+		<h2>Error</h2>
+		<h4>{{errMess}}</h4>
+	</div>
 </div>
