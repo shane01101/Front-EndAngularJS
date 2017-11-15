@@ -55,8 +55,8 @@ fxLayoutGap="10px">
 
 
 	<div fxFlex>
-		<md-list *ngIf="leaders">
-			<h2>Corporate Leadership</h2>
+        <h2>Corporate Leadership</h2>
+		<md-list *ngIf="leaders" [@expand]>
 			<md-list-item *ngFor="let leader of leaders" class="md-3-line">
 			<img md-list-avatar src="{{leader.image}}" alt="{{leader.name}}">
                 <h3 md-line>
