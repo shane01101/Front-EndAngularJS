@@ -23,6 +23,7 @@ import { flyInOut, expand }  from '../animations/app.animation';
 })
 export class HomeComponent implements OnInit {
 
+	dishes = '';
 	dish: Dish;
 	promotion: Promotion;
 	leader: Leader;
