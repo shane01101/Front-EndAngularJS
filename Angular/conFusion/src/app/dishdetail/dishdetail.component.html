@@ -30,16 +30,16 @@
 	</div>
 
 	<div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]>
-	<md-list>
-		<h3>Comments</h3>
-		<md-list-item *ngFor="let comment of dish.comments">
-			<p md-line> {{comment.comment}} </p>
-			<p md-line> {{comment.rating}} Stars</p>
-			<p md-line>
-				<span> -- {{comment.author}} {{comment.date | date}} </span>
-			</p>
-		</md-list-item>
-	</md-list>
+		<md-list>
+			<h3>Comments</h3>
+			<md-list-item *ngFor="let comment of dish.comments">
+				<p md-line> {{comment.comment}} </p>
+				<p md-line> {{comment.rating}} Stars</p>
+				<p md-line>
+					<span> -- {{comment.author}} {{comment.date | date}} </span>
+				</p>
+			</md-list-item>
+		</md-list>
 
 	<div *ngIf="commentForm.valid">
 		<md-list>
@@ -77,9 +77,6 @@
 		<button type="submit" md-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
 	</form>
 
-	<div [hidden]="dishes || errMess">
-		<md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
-	</div>
 	<div *ngIf="errMess">
 		<h2>Error</h2>
 		<h4>{{errMess}}</h4>

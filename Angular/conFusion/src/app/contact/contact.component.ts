@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Feedback, ContactType } from '../shared/feedback';
+import { FeedbackService } from '../services/feedback.service';
 import { flyInOut } from '../animations/app.animation';
 
 @Component({
@@ -21,6 +22,8 @@ export class ContactComponent implements OnInit {
 
 	feedbackForm: FormGroup;
 	feedback: Feedback;
+	submitForm: Feedback;
+	errMess: String;
 	contactType = ContactType;
 	formErrors = {
 		'firstname': '',
@@ -50,7 +53,8 @@ export class ContactComponent implements OnInit {
 		},
 	};
 
-	constructor(private fb: FormBuilder) { //inject FormBuilder
+	constructor(private feedbackService: FeedbackService,
+		private fb: FormBuilder) { //inject FormBuilder
 		this.createForm();
 	}
 
@@ -58,6 +62,10 @@ export class ContactComponent implements OnInit {
 	}
 
 	createForm() {
+		this.feedback = null;
+		this.submitForm = null;
+		this.errMess = null;
+
 		this.feedbackForm = this.fb.group({
 			firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
 			lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
@@ -93,16 +101,31 @@ export class ContactComponent implements OnInit {
 
 	onSubmit() {
 		this.feedback = this.feedbackForm.value;
-		console.log(this.feedback);
-		this.feedbackForm.reset({
-		firstname: '',
-		lastname: '',
-		telnum: '',
-		email: '',
-		agree: false,
-		contacttype: 'None',
-		message: ''
-		});
+	 
+		this.feedbackService.submitFeedback(this.feedback)
+			.subscribe(
+				feedback => {
+					this.submitForm = feedback;
+					setTimeout(() => { this.submitForm= null; this.feedback = null; }, 5000);
+					this.feedbackForm.reset({
+						firstname: '',
+						lastname: '',
+						telnum: '',
+						email: '',
+						agree: false,
+						contacttype: 'None',
+						message: ''
+					});
+				},
+				errmess => {
+					this.errMess = 'Form is invalid.';
+					setTimeout(() => {
+						this.feedback = null;
+						this.submitForm = null;
+						this.errMess = null;
+					}, 2000);
+				}
+			);
 	}
 
 }

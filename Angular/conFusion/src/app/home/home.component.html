@@ -5,59 +5,69 @@
     fxLayoutAlign.gt-md="space-around center"
     fxLayoutGap="10px">
 
-<md-card *ngIf="dish" fxFlex [@expand]>
-    <md-card-header>
-        <div md-card-avatar></div>
+    <md-card *ngIf="dish" fxFlex [@expand]>
+        <md-card-header>
+            <div md-card-avatar></div>
+            <md-card-title>
+                <h3>{{dish.name | uppercase}}</h3>
+            </md-card-title>
+        </md-card-header>
+        <img md-card-image src="{{BaseURL + dish.image}}" alt={{dish.name}}>
+        <md-card-content>
+            <p>{{dish.description}}
+            </p>
+        </md-card-content>
+    </md-card>
+
+    <div [hidden]="dish || dishErrMess">
+        <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+    </div>
+    <div *ngIf="dishErrMess">
+        <h2>Error</h2>
+        <h4>{{dishErrMess}}</h4>
+    </div>
+
+    <md-card *ngIf="promotion" fxFlex [@expand]>
+        <md-card-header>
+            <div md-card-avatar></div>
         <md-card-title>
-            <h3>{{dish.name | uppercase}}</h3>
+            <h3>{{promotion.name | uppercase}}</h3>
         </md-card-title>
-    </md-card-header>
-    <img md-card-image src="{{BaseURL + dish.image}}" alt={{dish.name}}>
-    <md-card-content>
-        <p>{{dish.description}}
-        </p>
-    </md-card-content>
-</md-card>
-<div [hidden]="dishes || dishErrMess">
-    <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
-  </div>
-  <div *ngIf="dishErrMess">
-    <h2>Error</h2>
-    <h4>{{dishErrMess}}</h4>
-  </div>
+        </md-card-header>
+        <img md-card-image src="{{BaseURL + promotion.image}}" alt={{promotion.name}}>
+        <md-card-content>
+            <p>{{promotion.description}}
+            </p>
+        </md-card-content>
+    </md-card>
 
-<md-card *ngIf="promotion" fxFlex [@expand]>
-    <md-card-header>
-        <div md-card-avatar></div>
-    <md-card-title>
-        <h3>{{promotion.name | uppercase}}</h3>
-    </md-card-title>
-    </md-card-header>
-    <img md-card-image src={{promotion.image}} alt={{promotion.name}}>
-    <md-card-content>
-        <p>{{promotion.description}}
-        </p>
-    </md-card-content>
-</md-card>
-<div [hidden]="promotion" >
-    <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
-</div>
+    <div [hidden]="promotion || promotionErrMess">
+        <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+    </div>
+    <div *ngIf="promotionhErrMess">
+        <h2>Error</h2>
+        <h4>{{promotionErrMess}}</h4>
+    </div>
 
-<md-card *ngIf="leader" fxFlex [@expand]>
-    <md-card-header>
-        <div md-card-avatar></div>
-    <md-card-title>
-        <h3>{{leader.name | uppercase}} {{leader.abbr | uppercase}}</h3>
-    </md-card-title>
-    </md-card-header>
-    <img md-card-image src={{leader.image}} alt={{leader.name}}>
-    <md-card-content>
-        <p>{{leader.designation}}</p>
-        <p>{{leader.description}}</p>
-    </md-card-content>
-</md-card>
-<div [hidden]="leader">
-    <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
-</div>
+    <md-card *ngIf="leader" fxFlex [@expand]>
+        <md-card-header>
+            <div md-card-avatar></div>
+        <md-card-title>
+            <h3>{{leader.name | uppercase}} {{leader.abbr | uppercase}}</h3>
+        </md-card-title>
+        </md-card-header>
+        <img md-card-image src="{{BaseURL + leader.image}}" alt={{leader.name}}>
+        <md-card-content>
+            <p>{{leader.designation}}</p>
+            <p>{{leader.description}}</p>
+        </md-card-content>
+    </md-card>
+    <div [hidden]="leader || leadersErrMess">
+        <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+    </div>
+    <div *ngIf="leaderErrMess">
+        <h2>Error</h2>
+        <h4>{{leaderErrMess}}</h4>
+    </div>
 
 </div>
