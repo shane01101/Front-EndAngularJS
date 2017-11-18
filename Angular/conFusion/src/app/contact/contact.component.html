@@ -38,9 +38,8 @@
 
  <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
-    <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
 
-    <form novalidate *ngIf="feedback == null" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <form novalidate *ngIf="!processed && !submitForm" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" [@expand]>
         <p>
           <md-input-container class="half-width"
            dividerColor="{{(formErrors.firstname) ? 'warn' : 'primary'}}">
@@ -96,14 +95,14 @@
         </p>
         <button type="submit" md-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
       </form>
-      <div *ngIf="feedback != null && submitForm == null && errMess == null">
+      <div *ngIf="!submitForm && processed">
         <md-spinner></md-spinner><h4>Submitting Form . . .</h4>
       </div>
       <div *ngIf="errMess">
         <h2>Error</h2>
         <h4>{{errMess}}</h4>
       </div>
-      <div *ngIf="submission != null">
+      <div *ngIf="submitForm" [@expand]>
         <h3>Your Submission</h3>
         <p>First Name: {{submitForm.firstname}}</p>
         <p>Last Name: {{submitForm.lastname}}</p>
